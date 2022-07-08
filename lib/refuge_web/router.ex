@@ -17,8 +17,26 @@ defmodule RefugeWeb.Router do
   scope "/", RefugeWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    # This macro "scope" generates the same thing as the below function:
+    # def match(conn, "GET", ["/bears"]) do
+    #   BearsController.index(conn)
+    # end
+    get "/", PageController, :index  # is the same as match/3 function above
+
+    # get "/", PageController, :index
+    # get "/bears", BearsController, :index
+    # get "/bears/new", BearsController, :new
+    # get "/bears/:id", BearsController, :show
+    # get "/bears/:id/edit", BearsController, :edit
+    # post "/bears", BearsController, :create
+    # put "/bears/:id", BearsController, :update
+    # patch "/bears/:id", BearsController, :update
+    # delete "/bears/:id", BearsController, :delete
+
+    # All the 8 operations above is the same as we define the macro `resources`:
+    resources "/bears", BearController
   end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", RefugeWeb do
